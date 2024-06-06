@@ -7,7 +7,7 @@ import { NextAuthOptions } from 'next-auth';
 import { Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 
-interface AppxSigninResponse {
+export interface AppxSigninResponse {
   data: {
     userid: string;
     name: string;
@@ -37,7 +37,7 @@ interface user {
   token: string;
 }
 
-const generateJWT = async (payload: JWTPayload) => {
+export const generateJWT = async (payload: JWTPayload) => {
   const secret = process.env.JWT_SECRET || 'secret';
 
   const jwk = await importJWK({ k: secret, alg: 'HS256', kty: 'oct' });
@@ -50,7 +50,7 @@ const generateJWT = async (payload: JWTPayload) => {
 
   return jwt;
 };
-async function validateUser(
+export async function validateUser(
   email: string,
   password: string,
 ): Promise<
